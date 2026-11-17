@@ -1,0 +1,444 @@
+
+{% extends 'store/base.html' %}
+
+{% block title %}About Us | TimeLux Watches{% endblock %}
+
+{% block content %}
+
+<!-- ABOUT HERO -->
+<section class="bg-black text-white py-20 md:py-28 text-center px-4">
+    <p class="text-yellow-500 uppercase tracking-[0.3em] text-sm mb-5">
+        Discover TimeLux
+    </p>
+
+    <h1 class="text-4xl md:text-6xl font-bold mb-6">
+        About TimeLux Watches
+    </h1>
+
+    <p class="text-gray-300 max-w-2xl mx-auto text-base md:text-lg leading-relaxed">
+        More than just keeping time. Discover watches that complement
+        your personality, express your style and make every moment count.
+    </p>
+</section>
+
+
+<!-- WATCH IMAGE SLIDER -->
+<section class="bg-gray-950 py-12 md:py-16 px-4">
+    <div class="max-w-6xl mx-auto">
+
+        <div class="text-center mb-8">
+            <p class="text-yellow-500 uppercase tracking-widest text-sm font-semibold">
+                The TimeLux Collection
+            </p>
+
+            <h2 class="text-white text-2xl md:text-3xl font-bold mt-2">
+                Discover Your Style
+            </h2>
+        </div>
+
+        <div id="watchSlider"
+             class="relative overflow-hidden rounded-2xl shadow-2xl group">
+
+            <!-- SLIDE 1 -->
+            <div class="watch-slide relative hidden">
+                <img
+                    src="https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=1600&auto=format&fit=crop&q=85"
+                    alt="Elegant wristwatch"
+                    class="w-full h-[350px] md:h-[520px] object-cover">
+
+                <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent"></div>
+
+                <div class="absolute inset-0 flex items-center px-8 md:px-16">
+                    <div class="max-w-xl text-white">
+                        <p class="text-yellow-400 uppercase tracking-widest text-sm mb-4">
+                            Timeless Elegance
+                        </p>
+
+                        <h3 class="text-3xl md:text-5xl font-bold mb-5">
+                            Style That Speaks For Itself
+                        </h3>
+
+                        <p class="text-gray-200 text-sm md:text-lg">
+                            Discover watches that bring elegance and
+                            personality to every occasion.
+                        </p>
+
+                        <a href="{% url 'shop' %}"
+                           class="inline-block mt-7 bg-yellow-500 text-black px-7 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition">
+                            Explore Collection
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SLIDE 2 -->
+            <div class="watch-slide relative hidden">
+                <img
+                    src="https://images.unsplash.com/photo-1524805444758-089113d48a6d?w=1600&auto=format&fit=crop&q=85"
+                    alt="Classic luxury wristwatch"
+                    class="w-full h-[350px] md:h-[520px] object-cover">
+
+                <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent"></div>
+
+                <div class="absolute inset-0 flex items-center px-8 md:px-16">
+                    <div class="max-w-xl text-white">
+                        <p class="text-yellow-400 uppercase tracking-widest text-sm mb-4">
+                            Every Second Matters
+                        </p>
+
+                        <h3 class="text-3xl md:text-5xl font-bold mb-5">
+                            Make Every Moment Count
+                        </h3>
+
+                        <p class="text-gray-200 text-sm md:text-lg">
+                            Find a watch that complements your lifestyle
+                            and helps you make a lasting impression.
+                        </p>
+
+                        <a href="{% url 'shop' %}"
+                           class="inline-block mt-7 bg-yellow-500 text-black px-7 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition">
+                            Shop Now
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- SLIDE 3 -->
+            <div class="watch-slide relative hidden">
+                <img
+                    src="https://images.unsplash.com/photo-1508685096489-7aacd43bd3b1?w=1600&auto=format&fit=crop&q=85"
+                    alt="Modern wristwatch"
+                    class="w-full h-[350px] md:h-[520px] object-cover">
+
+                <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/30 to-transparent"></div>
+
+                <div class="absolute inset-0 flex items-center px-8 md:px-16">
+                    <div class="max-w-xl text-white">
+                        <p class="text-yellow-400 uppercase tracking-widest text-sm mb-4">
+                            Wear Your Confidence
+                        </p>
+
+                        <h3 class="text-3xl md:text-5xl font-bold mb-5">
+                            Your Style. Your Time.
+                        </h3>
+
+                        <p class="text-gray-200 text-sm md:text-lg">
+                            Explore different styles and discover the
+                            watch that feels right for you.
+                        </p>
+
+                        <a href="{% url 'shop' %}"
+                           class="inline-block mt-7 bg-yellow-500 text-black px-7 py-3 rounded-lg font-semibold hover:bg-yellow-400 transition">
+                            View Watches
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+
+            <!-- PREVIOUS BUTTON -->
+            <button type="button"
+                    id="prevSlide"
+                    aria-label="Previous slide"
+                    class="absolute left-3 md:left-6 top-1/2 -translate-y-1/2 bg-black/60 text-white w-11 h-11 rounded-full hover:bg-yellow-500 hover:text-black transition">
+                &#10094;
+            </button>
+
+
+            <!-- NEXT BUTTON -->
+            <button type="button"
+                    id="nextSlide"
+                    aria-label="Next slide"
+                    class="absolute right-3 md:right-6 top-1/2 -translate-y-1/2 bg-black/60 text-white w-11 h-11 rounded-full hover:bg-yellow-500 hover:text-black transition">
+                &#10095;
+            </button>
+
+
+            <!-- SLIDE INDICATORS -->
+            <div id="slideIndicators"
+                 class="absolute bottom-6 left-0 right-0 flex justify-center gap-3">
+
+                <button type="button" aria-label="Show slide 1"
+                        class="slide-dot w-3 h-3 rounded-full bg-yellow-500"></button>
+
+                <button type="button" aria-label="Show slide 2"
+                        class="slide-dot w-3 h-3 rounded-full bg-white/60"></button>
+
+                <button type="button" aria-label="Show slide 3"
+                        class="slide-dot w-3 h-3 rounded-full bg-white/60"></button>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- WHO WE ARE -->
+<section class="py-16 md:py-24 px-4 bg-white">
+    <div class="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
+
+        <div>
+            <p class="text-yellow-600 uppercase tracking-widest text-sm font-semibold mb-3">
+                Who We Are
+            </p>
+
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mb-6">
+                Welcome to TimeLux Watches
+            </h2>
+
+            <p class="text-gray-600 leading-relaxed mb-5">
+                TimeLux Watches is an online watch shopping destination
+                created for people who appreciate style, elegance and
+                personal expression.
+            </p>
+
+            <p class="text-gray-600 leading-relaxed mb-5">
+                We believe that a watch is more than an accessory.
+                It is part of how you express yourself, complement
+                your appearance and make every moment meaningful.
+            </p>
+
+            <p class="text-gray-600 leading-relaxed">
+                Our goal is to make discovering and purchasing watches
+                simple and convenient through an enjoyable online
+                shopping experience.
+            </p>
+        </div>
+
+        <div class="relative">
+            <img
+                src="https://images.unsplash.com/photo-1547996160-81dfa63595aa?w=1000&auto=format&fit=crop&q=85"
+                alt="Elegant wristwatch collection"
+                class="w-full h-[350px] md:h-[450px] object-cover rounded-2xl shadow-xl">
+
+            <div class="absolute -bottom-5 -left-5 bg-yellow-500 text-black p-6 rounded-xl shadow-lg">
+                <p class="text-2xl font-bold">TimeLux</p>
+                <p class="text-sm">Timeless Style</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+
+<!-- MISSION AND VISION -->
+<section class="bg-gray-50 py-16 md:py-20 px-4">
+    <div class="max-w-6xl mx-auto">
+
+        <div class="text-center mb-12">
+            <p class="text-yellow-600 uppercase tracking-widest text-sm font-semibold">
+                What Drives Us
+            </p>
+
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3">
+                Our Mission & Vision
+            </h2>
+        </div>
+
+        <div class="grid md:grid-cols-2 gap-8">
+
+            <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100">
+                <div class="w-14 h-14 bg-yellow-100 rounded-xl flex items-center justify-center mb-6">
+                    <span class="text-2xl">&#9733;</span>
+                </div>
+
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                    Our Mission
+                </h3>
+
+                <p class="text-gray-600 leading-relaxed">
+                    To make discovering and purchasing stylish watches
+                    accessible, convenient and enjoyable for our customers.
+                </p>
+            </div>
+
+
+            <div class="bg-white p-8 md:p-10 rounded-2xl shadow-sm border border-gray-100">
+                <div class="w-14 h-14 bg-yellow-100 rounded-xl flex items-center justify-center mb-6">
+                    <span class="text-2xl">&#9673;</span>
+                </div>
+
+                <h3 class="text-2xl font-bold text-gray-900 mb-4">
+                    Our Vision
+                </h3>
+
+                <p class="text-gray-600 leading-relaxed">
+                    To become a trusted destination for watch lovers
+                    seeking style, convenience and a memorable shopping
+                    experience.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- WHY CHOOSE US -->
+<section class="py-16 md:py-24 px-4 bg-white">
+    <div class="max-w-6xl mx-auto">
+
+        <div class="text-center mb-14">
+            <p class="text-yellow-600 uppercase tracking-widest text-sm font-semibold">
+                The TimeLux Experience
+            </p>
+
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-900 mt-3">
+                Why Choose TimeLux?
+            </h2>
+
+            <p class="text-gray-500 max-w-2xl mx-auto mt-4">
+                We make your watch shopping experience simple,
+                convenient and enjoyable.
+            </p>
+        </div>
+
+
+        <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-7">
+
+            <div class="text-center p-7 rounded-2xl bg-gray-50 hover:shadow-lg transition">
+                <div class="text-3xl text-yellow-600 mb-5">&#9733;</div>
+                <h3 class="font-bold text-gray-900 text-lg mb-3">
+                    Stylish Collections
+                </h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    Explore different watch styles for different
+                    tastes and occasions.
+                </p>
+            </div>
+
+
+            <div class="text-center p-7 rounded-2xl bg-gray-50 hover:shadow-lg transition">
+                <div class="text-3xl text-yellow-600 mb-5">&#128722;</div>
+                <h3 class="font-bold text-gray-900 text-lg mb-3">
+                    Easy Shopping
+                </h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    Browse our collection and place your order
+                    conveniently online.
+                </p>
+            </div>
+
+
+            <div class="text-center p-7 rounded-2xl bg-gray-50 hover:shadow-lg transition">
+                <div class="text-3xl text-yellow-600 mb-5">&#128179;</div>
+                <h3 class="font-bold text-gray-900 text-lg mb-3">
+                    Flexible Payments
+                </h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    Choose between mobile money and cash on delivery.
+                </p>
+            </div>
+
+
+            <div class="text-center p-7 rounded-2xl bg-gray-50 hover:shadow-lg transition">
+                <div class="text-3xl text-yellow-600 mb-5">&#128276;</div>
+                <h3 class="font-bold text-gray-900 text-lg mb-3">
+                    Order Tracking
+                </h3>
+                <p class="text-gray-500 text-sm leading-relaxed">
+                    Check your order status and follow its progress
+                    through our tracking page.
+                </p>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- FINAL CALL TO ACTION -->
+<section class="bg-black py-16 md:py-20 px-4 text-center text-white">
+    <div class="max-w-3xl mx-auto">
+
+        <p class="text-yellow-500 uppercase tracking-widest text-sm font-semibold mb-4">
+            Find Your Perfect Watch
+        </p>
+
+        <h2 class="text-3xl md:text-5xl font-bold mb-6">
+            Make Every Second Count
+        </h2>
+
+        <p class="text-gray-300 leading-relaxed mb-8">
+            Explore the TimeLux collection and discover a watch
+            that matches your style.
+        </p>
+
+        <a href="{% url 'shop' %}"
+           class="inline-block bg-yellow-500 text-black px-9 py-4 rounded-lg font-bold hover:bg-yellow-400 transition">
+            Explore Our Collection
+        </a>
+
+    </div>
+</section>
+
+
+<!-- WATCH SLIDER JAVASCRIPT -->
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    const slides = document.querySelectorAll('.watch-slide');
+    const dots = document.querySelectorAll('.slide-dot');
+
+    const previousButton = document.getElementById('prevSlide');
+    const nextButton = document.getElementById('nextSlide');
+
+    if (!slides.length) return;
+
+    let currentSlide = 0;
+    let slideInterval;
+
+    function showSlide(index) {
+
+        slides.forEach((slide, i) => {
+            slide.classList.toggle('hidden', i !== index);
+        });
+
+        dots.forEach((dot, i) => {
+            dot.classList.toggle('bg-yellow-500', i === index);
+            dot.classList.toggle('bg-white/60', i !== index);
+        });
+
+        currentSlide = index;
+    }
+
+    function nextSlide() {
+        showSlide((currentSlide + 1) % slides.length);
+    }
+
+    function previousSlide() {
+        showSlide((currentSlide - 1 + slides.length) % slides.length);
+    }
+
+    function startAutoSlide() {
+        clearInterval(slideInterval);
+        slideInterval = setInterval(nextSlide, 5000);
+    }
+
+    nextButton.addEventListener('click', function () {
+        nextSlide();
+        startAutoSlide();
+    });
+
+    previousButton.addEventListener('click', function () {
+        previousSlide();
+        startAutoSlide();
+    });
+
+    dots.forEach((dot, index) => {
+        dot.addEventListener('click', function () {
+            showSlide(index);
+            startAutoSlide();
+        });
+    });
+
+    showSlide(0);
+    startAutoSlide();
+
+});
+</script>
+
+{% endblock %}

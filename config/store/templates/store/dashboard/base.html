@@ -1,0 +1,122 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}TimeLux Admin{% endblock %}</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            black: '#111111',
+                            gold: '#C6A75E',
+                            dark: '#1A1A1A'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+</head>
+
+<body class="bg-gray-100">
+
+    <div class="flex min-h-screen">
+
+        <!-- SIDEBAR -->
+        <aside class="w-64 bg-luxury-black text-white p-6">
+
+            <h1 class="text-2xl font-bold text-luxury-gold mb-2">
+                ♛ TimeLux
+            </h1>
+
+            <p class="text-xs text-gray-400 tracking-widest mb-10">
+                ADMINISTRATION
+            </p>
+
+            <nav class="space-y-3">
+
+                <a href="{% url 'admin_dashboard' %}"
+   class="flex items-center gap-3 px-4 py-3 text-white hover:bg-gray-100 rounded-lg">
+
+    <i class="fa-solid fa-chart-line"></i>
+
+    <span>Dashboard</span>
+
+</a>
+
+                <a href="{% url 'admin_products' %}"
+   class="flex items-center gap-3 px-4 py-3 rounded-lg hover:bg-gray-700">
+    <i class="fas fa-box"></i>
+    <span>Products</span>
+</a>
+
+    <a href="{% url 'admin_orders' %}"
+   class="flex items-center gap-3 px-4 py-3 text-white hover:bg-gray-100 rounded-lg">
+
+    <i class="fa-solid fa-shopping-bag"></i>
+
+    <span>Orders</span>
+
+</a>
+
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-800 rounded">
+                    <i class="fa-solid fa-users"></i>
+                    Customers
+                </a>
+
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-800 rounded">
+                    <i class="fa-solid fa-chart-bar"></i>
+                    Reports
+                </a>
+
+                <a href="#" class="flex items-center gap-3 p-3 hover:bg-gray-800 rounded">
+                    <i class="fa-solid fa-gear"></i>
+                    Settings
+                </a>
+
+            </nav>
+
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="flex-1">
+
+            <!-- TOP BAR -->
+            <header class="bg-white shadow-sm px-8 py-5 flex justify-between items-center">
+
+                <h2 class="text-xl font-semibold text-gray-800">
+                    {% block page_heading %}Dashboard{% endblock %}
+                </h2>
+
+                <div class="text-sm text-gray-600">
+                    Administrator
+                </div>
+
+            </header>
+
+            <!-- PAGE CONTENT -->
+            <section class="p-8">
+
+                {% block content %}
+                {% endblock %}
+
+            </section>
+
+        </main>
+
+    </div>
+
+</body>
+</html>

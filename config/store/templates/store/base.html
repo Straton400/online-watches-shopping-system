@@ -1,0 +1,267 @@
+
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>{% block title %}TimeLux Watches{% endblock %}</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        luxury: {
+                            black: '#111111',
+                            gold: '#C6A75E',
+                            white: '#FFFFFF',
+                            dark: '#1A1A1A'
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <!-- NAVIGATION BAR WILL GO HERE -->
+     <!-- NAVIGATION BAR -->
+<header class="bg-luxury-black border-b border-luxury-gold">
+
+    <div class="max-w-7xl mx-auto px-6 py-4 flex items-center justify-between">
+
+        <!-- LOGO -->
+        <div class="flex items-center gap-2">
+
+            <span class="text-luxury-gold text-4xl">♛</span>
+
+            <div>
+                <h1 class="text-luxury-gold text-2xl font-bold tracking-wide">
+                    TimeLux
+                </h1>
+
+                <p class="text-white text-xs tracking-[4px] text-center">
+                    WATCHES
+                </p>
+            </div>
+
+        </div>
+
+        <!-- NAVIGATION LINKS -->
+        <nav class="hidden md:flex items-center gap-8">
+
+            <a href="/" class="text-luxury-gold hover:text-white transition">
+                Home
+            </a>
+
+            <a href="/shop/" class="text-white hover:text-luxury-gold transition">
+               Our Shop
+            </a>
+
+  <a href="{% url 'about' %}"
+   class="text-white hover:text-yellow-500 transition">
+    About
+</a>
+
+            <a href="{% url 'contact' %}"
+   class="text-white hover:text-yellow-500 transition">
+    Contact
+</a>
+            <a href="{% url 'track_order' %}"
+   <a href="{% url 'track_order' %}"
+   class="text-white hover:text-luxury-gold transition">
+    Track Order
+</a>
+
+        </nav>
+
+        <!-- SEARCH AND CUSTOMER ACTIONS -->
+        <div class="flex items-center gap-5">
+
+            <!-- SEARCH -->
+            <div class="hidden lg:flex items-center bg-luxury-dark rounded-full px-4 py-2">
+
+                <span class="text-luxury-gold mr-2">⌕</span>
+
+                <input
+                    type="text"
+                    placeholder="Search watches..."
+                    class="bg-transparent text-white outline-none text-sm w-36"
+                >
+
+            </div>
+
+            <!-- ACCOUNT -->
+            <a href="/login/" class="text-white text-2xl hover:text-luxury-gold">
+                ♙
+            </a>
+
+            <!-- SHOPPING CART -->
+            
+<a href="{% url 'cart' %}" class="relative">
+
+    <i class="fa-solid fa-cart-shopping"></i>
+
+    <span class="absolute -top-2 -right-3 bg-luxury-gold text-black text-xs font-bold w-5 h-5 rounded-full flex items-center justify-center">
+        {{ cart_count }}
+    </span>
+
+</a>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</header>
+
+    <main>
+        {% block content %}
+        {% endblock %}
+    </main>
+
+    <!-- FOOTER WILL GO HERE -->
+     <!-- FOOTER SECTION -->
+<footer id="contact" class="bg-luxury-black text-gray-300 pt-16 pb-6">
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 pb-12">
+
+            <!-- BRAND -->
+            <div>
+                <h2 class="text-2xl font-bold tracking-wider text-white mb-5">
+                    <span class="text-luxury-gold">♛</span> TIMELUX
+                </h2>
+
+                <p class="text-gray-400 leading-relaxed text-sm mb-6">
+                    Discover timeless elegance and exceptional quality.
+                    TimeLux brings you watches that define your style.
+                </p>
+
+                <div class="flex gap-5 text-xl">
+                    <a href="#" class="hover:text-luxury-gold transition">
+                        <i class="fa-brands fa-facebook"></i>
+                    </a>
+                    <a href="#" class="hover:text-luxury-gold transition">
+                        <i class="fa-brands fa-instagram"></i>
+                    </a>
+                    <a href="#" class="hover:text-luxury-gold transition">
+                        <i class="fa-brands fa-whatsapp"></i>
+                    </a>
+                </div>
+            </div>
+
+            <!-- QUICK LINKS -->
+            <div>
+                <h3 class="text-white font-semibold text-lg mb-5">
+                    Quick Links
+                </h3>
+
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#home" class="hover:text-luxury-gold">Home</a></li>
+                    <li><a href="#featured" class="hover:text-luxury-gold">Shop Watches</a></li>
+                    <li><a href="#about" class="hover:text-luxury-gold">About Us</a></li>
+                    <li><a href="#contact" class="hover:text-luxury-gold">Contact</a></li>
+                </ul>
+            </div>
+
+            <!-- CUSTOMER SERVICE -->
+            <div>
+                <h3 class="text-white font-semibold text-lg mb-5">
+                    Customer Service
+                </h3>
+
+                <ul class="space-y-3 text-sm">
+                    <li><a href="#" class="hover:text-luxury-gold">My Account</a></li>
+                    <li><a href="#" class="hover:text-luxury-gold">My Orders</a></li>
+                    <li><a href="#" class="hover:text-luxury-gold">Shopping Cart</a></li>
+                    <li><a href="#" class="hover:text-luxury-gold">Privacy Policy</a></li>
+                </ul>
+            </div>
+
+            <!-- CONTACT -->
+            <div>
+                <h3 class="text-white font-semibold text-lg mb-5">
+                    Contact Us
+                </h3>
+
+                <ul class="space-y-4 text-sm">
+                    <li class="flex gap-3">
+                        <i class="fa-solid fa-location-dot text-luxury-gold mt-1"></i>
+                        <span>Dar es Salaam, Tanzania</span>
+                    </li>
+
+                    <li class="flex gap-3">
+                        <i class="fa-solid fa-phone text-luxury-gold mt-1"></i>
+                        <span>+255 XXX XXX XXX</span>
+                    </li>
+
+                    <li class="flex gap-3">
+                        <i class="fa-solid fa-envelope text-luxury-gold mt-1"></i>
+                        <span>info@timelux.co.tz</span>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- COPYRIGHT -->
+        <div class="border-t border-gray-700 pt-6 text-center">
+            <p class="text-sm text-gray-500">
+                © 2026 TimeLux Watches. All Rights Reserved.
+            </p>
+        </div>
+
+    </div>
+</footer>
+
+
+{% block extra_js %}
+
+<script>
+    const menuButton = document.getElementById('mobile-menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuIcon = document.getElementById('menu-icon');
+
+    menuButton.addEventListener('click', function () {
+
+        mobileMenu.classList.toggle('hidden');
+
+        const isOpen = !mobileMenu.classList.contains('hidden');
+
+        menuButton.setAttribute('aria-expanded', isOpen);
+
+        if (isOpen) {
+            menuIcon.classList.replace('fa-bars', 'fa-xmark');
+        } else {
+            menuIcon.classList.replace('fa-xmark', 'fa-bars');
+        }
+
+    });
+
+    // Close menu after selecting a link
+    mobileMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function () {
+            mobileMenu.classList.add('hidden');
+            menuIcon.classList.replace('fa-xmark', 'fa-bars');
+            menuButton.setAttribute('aria-expanded', 'false');
+        });
+    });
+</script>
+
+{% endblock %}
+
+
+</body>
+</html>

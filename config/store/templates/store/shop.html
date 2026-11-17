@@ -1,0 +1,214 @@
+
+{% extends 'store/base.html' %}
+
+{% block title %}Shop | TimeLux Watches{% endblock %}
+
+{% block content %}
+
+<!-- SHOP HERO -->
+<section class="bg-white py-20 md:py-24 border-b border-gray-100">
+    <div class="max-w-7xl mx-auto px-6 text-center">
+
+        <p class="text-luxury-gold uppercase tracking-[6px] text-xs md:text-sm mb-5">
+            The TimeLux Collection
+        </p>
+
+        <h1 class="text-4xl md:text-6xl font-light text-gray-900 mb-6 tracking-wide">
+            Discover Timeless
+            <span class="font-semibold">Elegance</span>
+        </h1>
+
+        <p class="text-gray-500 max-w-xl mx-auto text-sm md:text-base leading-7">
+            Explore our carefully selected collection of watches.
+            Find the perfect timepiece that reflects your personality
+            and defines your style.
+        </p>
+
+        <div class="w-16 h-[2px] bg-luxury-gold mx-auto mt-8"></div>
+
+    </div>
+</section>
+
+
+<!-- SHOP COLLECTION -->
+<section class="bg-[#fafafa] py-14 md:py-20">
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+        <!-- SEARCH AND COLLECTION HEADER -->
+        <div class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-12">
+
+            <div>
+                <p class="text-luxury-gold uppercase tracking-[3px] text-xs mb-2">
+                    Find Your Perfect Watch
+                </p>
+
+                <h2 class="text-2xl md:text-3xl font-semibold text-gray-900">
+                    Our Collection
+                </h2>
+            </div>
+
+            <!-- PRODUCT SEARCH -->
+            <form method="GET"
+                  action="{% url 'shop' %}"
+                  class="relative w-full md:max-w-sm">
+
+                <input
+                    type="text"
+                    name="q"
+                    value="{{ search_query }}"
+                    placeholder="Search watches..."
+                    class="w-full bg-white border border-gray-200 px-5 py-4 pr-12 text-sm outline-none focus:border-luxury-gold transition"
+                >
+
+                <button type="submit"
+                        aria-label="Search watches"
+                        class="absolute right-5 top-1/2 -translate-y-1/2 text-gray-400 hover:text-luxury-gold transition">
+
+                    <i class="fa-solid fa-magnifying-glass"></i>
+
+                </button>
+
+            </form>
+
+        </div>
+
+
+        <!-- COLLECTION INFORMATION -->
+        <div class="flex justify-between items-center border-b border-gray-200 pb-5 mb-8">
+
+            <p class="text-sm text-gray-500">
+                Showing
+                <span class="font-semibold text-gray-900">
+                    {{ watches|length }}
+                </span>
+                watches
+            </p>
+
+            {% if search_query %}
+            <a href="{% url 'shop' %}"
+               class="text-xs text-luxury-gold hover:text-black transition">
+                Clear Search
+                <i class="fa-solid fa-xmark ml-1"></i>
+            </a>
+            {% endif %}
+
+        </div>
+
+
+        <!-- PRODUCT GRID -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-x-6 gap-y-10">
+
+            {% for watch in watches %}
+
+            <!-- PRODUCT CARD -->
+            <div class="bg-white group border border-gray-100 hover:border-luxury-gold/40 hover:shadow-xl transition duration-500">
+
+                <!-- PRODUCT IMAGE -->
+                <div class="relative bg-[#f5f5f5] overflow-hidden">
+
+                    <a href="{% url 'product_details' watch.id %}"
+                       class="block">
+
+                        <img src="{{ watch.image.url }}"
+                             alt="{{ watch.name }}"
+                             class="w-full h-72 object-contain p-7 group-hover:scale-110 transition duration-700">
+
+                    </a>
+
+                    {% if watch.is_featured %}
+                    <span class="absolute top-4 left-4 bg-luxury-gold text-black text-[10px] uppercase tracking-widest font-semibold px-3 py-2">
+                        Featured
+                    </span>
+                    {% endif %}
+
+                    <div class="absolute bottom-4 right-4">
+
+                        <span class="bg-white/90 text-gray-700 text-[10px] uppercase tracking-widest px-3 py-2">
+                            TimeLux
+                        </span>
+
+                    </div>
+
+                </div>
+
+
+                <!-- PRODUCT INFORMATION -->
+                <div class="p-5">
+
+                    <p class="text-[11px] text-gray-400 uppercase tracking-[2px] mb-3">
+                        {{ watch.category }}
+                    </p>
+
+                    <h3 class="text-base font-semibold text-gray-900 mb-3 group-hover:text-luxury-gold transition">
+                        {{ watch.name }}
+                    </h3>
+
+                    <div class="flex items-center justify-between mb-5">
+
+                        <p class="text-luxury-gold font-semibold text-lg">
+                            TZS {{ watch.price|floatformat:0 }}
+                        </p>
+
+                        {% if watch.stock > 0 %}
+                        <span class="text-[10px] text-green-600 uppercase tracking-wider">
+                            In Stock
+                        </span>
+                        {% else %}
+                        <span class="text-[10px] text-red-500 uppercase tracking-wider">
+                            Out of Stock
+                        </span>
+                        {% endif %}
+
+                    </div>
+
+                    <a href="{% url 'product_details' watch.id %}"
+                       class="flex items-center justify-center gap-3 w-full bg-[#111111] text-white py-3.5 text-xs uppercase tracking-[2px] hover:bg-luxury-gold hover:text-black transition duration-300">
+
+                        View Details
+
+                        <i class="fa-solid fa-arrow-right text-xs"></i>
+
+                    </a>
+
+                </div>
+
+            </div>
+
+            {% empty %}
+
+            <!-- EMPTY STATE -->
+            <div class="col-span-full text-center py-24">
+
+                <i class="fa-regular fa-clock text-5xl text-gray-300 mb-6"></i>
+
+                <h3 class="text-2xl font-semibold text-gray-800 mb-3">
+                    No Watches Found
+                </h3>
+
+                <p class="text-gray-500 text-sm mb-7">
+                    {% if search_query %}
+                        We couldn't find any watches matching "{{ search_query }}".
+                    {% else %}
+                        Our collection will be updated soon. Please check again.
+                    {% endif %}
+                </p>
+
+                {% if search_query %}
+                <a href="{% url 'shop' %}"
+                   class="inline-block bg-[#111111] text-white px-8 py-3 text-xs uppercase tracking-widest hover:bg-luxury-gold hover:text-black transition">
+                    View All Watches
+                </a>
+                {% endif %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

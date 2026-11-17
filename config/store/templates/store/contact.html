@@ -1,0 +1,179 @@
+
+{% extends 'store/base.html' %}
+
+{% block title %}Contact Us | TimeLux Watches{% endblock %}
+
+{% block content %}
+
+<!-- Contact Hero Section -->
+<section class="bg-black text-white py-20 px-6 text-center">
+    <div class="max-w-4xl mx-auto">
+        <p class="text-yellow-500 uppercase tracking-[4px] text-sm mb-4">
+            We're Here to Help
+        </p>
+
+        <h1 class="text-4xl md:text-6xl font-bold mb-6">
+            Get in <span class="text-yellow-500">Touch</span>
+        </h1>
+
+        <p class="text-gray-300 text-lg max-w-2xl mx-auto">
+            Have questions about our watches or need assistance with your order?
+            Feel free to reach out. We'd love to hear from you.
+        </p>
+    </div>
+</section>
+
+
+<!-- Contact Information Section -->
+<section class="bg-gray-50 py-20 px-6">
+    <div class="max-w-6xl mx-auto">
+
+        <div class="text-center mb-14">
+            <h2 class="text-3xl font-bold text-gray-900">
+                Contact Information
+            </h2>
+
+            <p class="text-gray-500 mt-3">
+                Choose your preferred way to connect with us.
+            </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+            <!-- Phone -->
+            <div class="bg-white p-8 rounded-xl shadow-sm text-center hover:shadow-lg transition">
+                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <span class="text-3xl">📞</span>
+                </div>
+
+                <h3 class="text-xl font-bold mb-3">Call Us</h3>
+
+                <p class="text-gray-500 text-sm mb-5">
+                    Speak directly with our team.
+                </p>
+
+                <a href="tel:+255700000000"
+                   class="text-yellow-600 font-semibold hover:text-black transition">
+                    +255 700 000 000
+                </a>
+            </div>
+
+
+            <!-- WhatsApp -->
+            <div class="bg-white p-8 rounded-xl shadow-sm text-center hover:shadow-lg transition">
+                <div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <span class="text-3xl">💬</span>
+                </div>
+
+                <h3 class="text-xl font-bold mb-3">WhatsApp</h3>
+
+                <p class="text-gray-500 text-sm mb-5">
+                    Chat with us for quick assistance.
+                </p>
+
+                <a href="https://wa.me/255700000000"
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   class="text-green-600 font-semibold hover:text-black transition">
+                    Chat With Us
+                </a>
+            </div>
+
+
+            <!-- Email -->
+            <div class="bg-white p-8 rounded-xl shadow-sm text-center hover:shadow-lg transition">
+                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <span class="text-3xl">✉️</span>
+                </div>
+
+                <h3 class="text-xl font-bold mb-3">Email Us</h3>
+
+                <p class="text-gray-500 text-sm mb-5">
+                    Send us your enquiries by email.
+                </p>
+
+                <a href="mailto:info@timeluxwatches.com"
+                   class="text-yellow-600 font-semibold hover:text-black transition break-all">
+                    info@timeluxwatches.com
+                </a>
+            </div>
+
+
+            <!-- Location -->
+            <div class="bg-white p-8 rounded-xl shadow-sm text-center hover:shadow-lg transition">
+                <div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-5">
+                    <span class="text-3xl">📍</span>
+                </div>
+
+                <h3 class="text-xl font-bold mb-3">Our Location</h3>
+
+                <p class="text-gray-500 text-sm mb-5">
+                    Find us in Tanzania.
+                </p>
+
+                <span class="text-yellow-600 font-semibold">
+                    Dar es Salaam, Tanzania
+                </span>
+            </div>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Social Media Section -->
+<section class="bg-white py-16 px-6">
+    <div class="max-w-4xl mx-auto text-center">
+
+        <h2 class="text-3xl font-bold text-gray-900 mb-4">
+            Connect With Us
+        </h2>
+
+        <p class="text-gray-500 mb-8">
+            Follow TimeLux Watches on social media and stay updated
+            with our latest collections and offers.
+        </p>
+
+        <div class="flex flex-wrap justify-center gap-4">
+
+            <a href="#"
+               class="border border-gray-300 px-7 py-3 rounded-full font-semibold hover:bg-black hover:text-white hover:border-black transition">
+                Instagram
+            </a>
+
+            <a href="#"
+               class="border border-gray-300 px-7 py-3 rounded-full font-semibold hover:bg-black hover:text-white hover:border-black transition">
+                Facebook
+            </a>
+
+            <a href="#"
+               class="border border-gray-300 px-7 py-3 rounded-full font-semibold hover:bg-black hover:text-white hover:border-black transition">
+                TikTok
+            </a>
+
+        </div>
+    </div>
+</section>
+
+
+<!-- Order Tracking CTA -->
+<section class="bg-black py-16 px-6 text-center text-white">
+    <div class="max-w-3xl mx-auto">
+
+        <h2 class="text-3xl md:text-4xl font-bold mb-5">
+            Already Placed an Order?
+        </h2>
+
+        <p class="text-gray-300 mb-8">
+            Keep track of your purchase and stay updated on your order status.
+        </p>
+
+        <a href="{% url 'track_order' %}"
+           class="inline-block bg-yellow-500 text-black px-8 py-4 rounded-full font-bold hover:bg-yellow-400 transition">
+            Track Your Order
+        </a>
+
+    </div>
+</section>
+
+{% endblock %}

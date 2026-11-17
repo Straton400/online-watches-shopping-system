@@ -1,0 +1,214 @@
+
+{% extends 'store/base.html' %}
+
+{% block title %}Shopping Cart | TimeLux Watches{% endblock %}
+
+{% block content %}
+
+<section class="bg-gray-50 min-h-screen py-16">
+
+    <div class="max-w-7xl mx-auto px-6 lg:px-10">
+
+        <!-- PAGE HEADER -->
+        <div class="mb-10">
+            <p class="text-luxury-gold uppercase tracking-[4px] text-xs mb-3">
+                TimeLux Collection
+            </p>
+
+            <h1 class="text-3xl md:text-4xl font-semibold text-gray-900">
+                Shopping Cart
+            </h1>
+
+            <p class="text-gray-500 mt-3">
+                Review your selected watches before checkout.
+            </p>
+        </div>
+
+        {% if items %}
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-10">
+
+            <!-- CART ITEMS -->
+            <div class="lg:col-span-2 space-y-5">
+
+                {% for item in items %}
+
+                <div class="bg-white p-5 flex flex-col sm:flex-row gap-6 shadow-sm">
+
+                    <!-- WATCH IMAGE -->
+                    <div class="bg-gray-100 w-full sm:w-40 h-40 flex-shrink-0">
+                        <img src="{{ item.watch.image.url }}"
+                             alt="{{ item.watch.name }}"
+                             class="w-full h-full object-contain p-4">
+                    </div>
+
+                    <!-- WATCH INFORMATION -->
+                    <div class="flex-1">
+
+                        <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">
+                            {{ item.watch.category }}
+                        </p>
+
+                        <h2 class="text-lg font-semibold text-gray-900 mb-3">
+                            {{ item.watch.name }}
+                        </h2>
+
+                        <p class="text-luxury-gold font-semibold mb-4">
+                            TZS {{ item.watch.price|floatformat:0 }}
+                        </p>
+
+                        
+<form method="POST"
+      action="{% url 'update_cart' item.watch.id %}"
+      class="flex items-center gap-3">
+
+    {% csrf_token %}
+
+    <label class="text-sm text-gray-500">
+        Quantity:
+    </label>
+
+    <input
+        type="number"
+        name="quantity"
+        value="{{ item.quantity }}"
+        min="1"
+        max="{{ item.watch.stock }}"
+        class="w-20 border border-gray-300 px-3 py-2 text-center outline-none focus:border-luxury-gold"
+        required
+    >
+
+    <button type="submit"
+            class="text-sm text-luxury-gold hover:text-black transition">
+        Update
+    </button>
+
+</form>
+
+
+<form method="POST"
+      action="{% url 'remove_from_cart' item.watch.id %}"
+      class="mt-4">
+
+    {% csrf_token %}
+
+    <button type="submit"
+            class="text-xs text-red-500 hover:text-red-700 transition">
+
+        <i class="fa-solid fa-trash mr-1"></i>
+        Remove
+
+    </button>
+
+</form>
+
+
+                    </div>
+
+                    <!-- SUBTOTAL -->
+                    <div class="sm:text-right">
+
+                        <p class="text-xs text-gray-400 uppercase tracking-widest mb-2">
+                            Subtotal
+                        </p>
+
+                        <p class="font-semibold text-gray-900">
+                            TZS {{ item.subtotal|floatformat:0 }}
+                        </p>
+
+                    </div>
+
+                </div>
+
+                {% endfor %}
+
+                <a href="{% url 'shop' %}"
+                   class="inline-flex items-center gap-2 text-sm text-gray-600 hover:text-luxury-gold transition">
+
+                    <i class="fa-solid fa-arrow-left"></i>
+                    Continue Shopping
+
+                </a>
+
+            </div>
+
+
+            <!-- ORDER SUMMARY -->
+            <div class="lg:col-span-1">
+
+                <div class="bg-white p-7 shadow-sm sticky top-6">
+
+                    <h2 class="text-xl font-semibold text-gray-900 mb-7">
+                        Order Summary
+                    </h2>
+
+                    <div class="flex justify-between border-b pb-5 mb-5">
+
+                        <span class="text-gray-500 text-sm">
+                            Total Items
+                        </span>
+
+                        <span class="font-medium">
+                            {{ items|length }}
+                        </span>
+
+                    </div>
+
+                    <div class="flex justify-between mb-7">
+
+                        <span class="text-gray-600 font-medium">
+                            Total
+                        </span>
+
+                        <span class="text-xl font-bold text-luxury-gold">
+                            TZS {{ total|floatformat:0 }}
+                        </span>
+
+                    </div>
+
+                    <a href="{% url 'checkout' %}"
+                  class="block w-full text-center bg-black text-white py-4 rounded-lg font-semibold hover:bg-gray-800 transition">
+                   Proceed to Checkout
+                  </a>
+
+                    <p class="text-xs text-gray-400 text-center mt-4">
+                        Secure checkout will be available soon.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% else %}
+
+        <!-- EMPTY CART -->
+        <div class="bg-white text-center py-20 px-6 shadow-sm">
+
+            <i class="fa-solid fa-cart-shopping text-5xl text-gray-300 mb-6"></i>
+
+            <h2 class="text-2xl font-semibold text-gray-900 mb-3">
+                Your Cart Is Empty
+            </h2>
+
+            <p class="text-gray-500 mb-8">
+                You haven't added any watches to your shopping cart yet.
+            </p>
+
+            <a href="{% url 'shop' %}"
+               class="inline-block bg-luxury-black text-white px-9 py-4 text-xs uppercase tracking-widest hover:bg-luxury-gold hover:text-black transition">
+
+                Explore Watches
+
+            </a>
+
+        </div>
+
+        {% endif %}
+
+    </div>
+
+</section>
+
+{% endblock %}

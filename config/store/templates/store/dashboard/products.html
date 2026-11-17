@@ -1,0 +1,100 @@
+
+{% extends 'store/dashboard/base.html' %}
+
+{% block content %}
+
+<div class="flex justify-between items-center mb-8">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-800">Products</h1>
+        <p class="text-gray-500 mt-1">Manage your watch collection</p>
+    </div>
+
+    <a href="{% url 'add_watch' %}"
+       class="bg-blue-600 hover:bg-blue-700 text-white px-5 py-3 rounded-lg">
+        + Add New Watch
+    </a>
+</div>
+
+<div class="bg-white rounded-xl shadow-sm p-6">
+    <h2 class="text-lg font-semibold mb-4">All Watches</h2>
+
+    <div class="overflow-x-auto">
+        <table class="w-full text-left">
+            <thead>
+                <tr class="border-b text-gray-500">
+                    <th class="py-3">Image</th>
+                    <th class="py-3">Watch Name</th>
+                    <th class="py-3">Price</th>
+                    <th class="py-3">Stock</th>
+                    <th class="py-3">Status</th>
+                    <th class="py-3">Actions</th>
+                </tr>
+            </thead>
+
+            <tbody>
+
+                {% for watch in watches %}
+
+                <tr class="border-b">
+
+                    <td class="py-4">
+                        <img src="{{ watch.image.url }}"
+                             alt="{{ watch.name }}"
+                             class="w-16 h-16 object-contain rounded">
+                    </td>
+
+                    <td class="py-4 font-medium text-gray-800">
+                        {{ watch.name }}
+                    </td>
+
+                    <td class="py-4">
+                        TZS {{ watch.price|floatformat:0 }}
+                    </td>
+
+                    <td class="py-4">
+                        {{ watch.stock }}
+                    </td>
+
+                    <td class="py-4">
+                        {% if watch.is_active %}
+                            <span class="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs">
+                                Active
+                            </span>
+                        {% else %}
+                            <span class="bg-red-100 text-red-700 px-3 py-1 rounded-full text-xs">
+                                Inactive
+                            </span>
+                        {% endif %}
+                    </td>
+
+                    <td class="py-4">
+                        <div class="flex gap-3">
+                            <a href="{% url 'edit_watch' watch.id %}"
+   class="text-blue-600 hover:text-blue-800 text-sm">
+    Edit
+</a>
+                            <a href="{% url 'delete_watch' watch.id %}"
+   class="text-red-600 hover:text-red-800 text-sm">
+    Delete
+</a>
+                        </div>
+                    </td>
+
+                </tr>
+
+                {% empty %}
+
+                <tr>
+                    <td colspan="6" class="py-8 text-center text-gray-400">
+                        No watches added yet.
+                    </td>
+                </tr>
+
+                {% endfor %}
+
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock %}

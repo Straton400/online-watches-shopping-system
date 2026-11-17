@@ -1,0 +1,172 @@
+
+{% extends 'store/dashboard/base.html' %}
+
+{% block title %}Order Details | TimeLux{% endblock %}
+
+{% block page_heading %}Order Details{% endblock %}
+
+{% block content %}
+
+<div class="mb-6 flex items-center justify-between">
+    <div>
+        <h1 class="text-2xl font-bold text-gray-800">
+            Order #{{ order.order_number }}
+        </h1>
+        <p class="text-gray-500 mt-1">
+            Placed on {{ order.created_at|date:"d M Y, H:i" }}
+        </p>
+    </div>
+
+    <a href="{% url 'admin_orders' %}"
+       class="text-gray-600 hover:text-black">
+        <i class="fa-solid fa-arrow-left mr-2"></i>
+        Back to Orders
+    </a>
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+
+    <!-- Customer Information -->
+    <div class="bg-white p-6 rounded-lg shadow-sm">
+        <h2 class="font-bold text-lg mb-4">Customer Information</h2>
+
+        <p class="text-gray-500 text-sm">Customer Name</p>
+        <p class="font-medium mb-3">{{ order.customer_name }}</p>
+
+        <p class="text-gray-500 text-sm">Phone Number</p>
+        <p class="font-medium mb-3">{{ order.customer_phone }}</p>
+
+        <p class="text-gray-500 text-sm">Email Address</p>
+        <p class="font-medium mb-3">
+            {{ order.customer_email|default:"Not provided" }}
+        </p>
+
+        <p class="text-gray-500 text-sm">Delivery Address</p>
+        <p class="font-medium">{{ order.delivery_address }}</p>
+    </div>
+
+    <!-- Order Information -->
+    <div class="bg-white p-6 rounded-lg shadow-sm">
+
+        <h2 class="font-bold text-lg mb-4">Order Information</h2>
+
+        <p class="text-gray-500 text-sm">Order Status</p>
+        <p class="font-medium mb-3">
+            {{ order.get_order_status_display }}
+        </p>
+
+        <p class="text-gray-500 text-sm">Payment Method</p>
+        <p class="font-medium mb-3">
+            {{ order.get_payment_method_display }}
+        </p>
+
+        <p class="text-gray-500 text-sm">Payment Status</p>
+        <p class="font-medium">
+            {{ order.get_payment_status_display }}
+        </p>
+
+        <!-- Update Order Status -->
+        <hr class="my-5">
+
+        <h3 class="font-bold text-gray-800 mb-3">
+            Update Order Status
+        </h3>
+
+        <form method="POST"
+              action="{% url 'update_order_status' order.id %}">
+
+            {% csrf_token %}
+
+            <select name="order_status"
+        class="w-full border border-gray-300 rounded-lg p-3 mb-3 bg-white text-black cursor-pointer"
+        style="pointer-events: auto; position: relative; z-index: 50;">
+
+    {% for value, label in order_status_choices %}
+        <option value="{{ value }}"
+            {% if order.order_status == value %}selected{% endif %}>
+            {{ label }}
+        </option>
+    {% endfor %}
+
+</select>
+
+            <button type="submit"
+                    class="w-full bg-black text-white py-3 rounded-lg hover:bg-gray-800">
+                Update Status
+            </button>
+
+        </form>
+
+    </div>
+
+    <!-- Total Amount -->
+    <div class="bg-white p-6 rounded-lg shadow-sm">
+        <h2 class="font-bold text-lg mb-4">Order Total</h2>
+
+        <p class="text-gray-500 text-sm">Total Amount</p>
+
+        <h3 class="text-3xl font-bold text-gray-900 mt-2">
+            TZS {{ order.total_amount|floatformat:0 }}
+        </h3>
+    </div>
+
+</div>
+
+<!-- Ordered Products -->
+<div class="bg-white rounded-lg shadow-sm mt-6 overflow-x-auto">
+
+    <div class="p-6 border-b">
+        <h2 class="font-bold text-lg">Ordered Products</h2>
+    </div>
+
+    <table class="w-full text-left">
+
+        <thead class="bg-gray-50">
+            <tr>
+                <th class="p-4 text-sm text-gray-600">Watch</th>
+                <th class="p-4 text-sm text-gray-600">Quantity</th>
+                <th class="p-4 text-sm text-gray-600">Unit Price</th>
+                <th class="p-4 text-sm text-gray-600">Subtotal</th>
+            </tr>
+        </thead>
+
+        <tbody class="divide-y">
+
+            {% for item in order_items %}
+
+            <tr>
+                <td class="p-4 font-medium">
+                    {{ item.watch.name }}
+                </td>
+
+                <td class="p-4">
+                    {{ item.quantity }}
+                </td>
+
+                <td class="p-4">
+                    TZS {{ item.price|floatformat:0 }}
+                </td>
+
+                <td class="p-4 font-medium">
+                    TZS {{ item.subtotal|floatformat:0 }}
+                </td>
+            </tr>
+
+            {% empty %}
+
+            <tr>
+                <td colspan="4"
+                    class="p-8 text-center text-gray-500">
+                    No products found in this order.
+                </td>
+            </tr>
+
+            {% endfor %}
+
+        </tbody>
+
+    </table>
+
+</div>
+
+{% endblock %}

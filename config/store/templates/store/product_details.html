@@ -1,0 +1,65 @@
+{% extends 'store/base.html' %}
+
+{% block title %}{{ watch.name }} | TimeLux Watches{% endblock %}
+
+{% block content %}
+
+<section class="bg-gray-50 py-16">
+    <div class="max-w-7xl mx-auto px-6">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-12">
+
+            <div class="bg-white p-8">
+                <img src="{{ watch.image.url }}"
+                     alt="{{ watch.name }}"
+                     class="w-full h-96 object-contain">
+            </div>
+
+            <div>
+                <p class="text-luxury-gold uppercase tracking-widest mb-4">
+                    {{ watch.category }}
+                </p>
+
+                <h1 class="text-3xl font-bold mb-5">
+                    {{ watch.name }}
+                </h1>
+
+                <p class="text-2xl font-bold text-luxury-gold mb-6">
+                    TZS {{ watch.price|floatformat:0 }}
+                </p>
+
+                <p class="text-gray-600 leading-7 mb-6">
+                    {{ watch.description }}
+                </p>
+
+                <p class="mb-6">
+                    Availability:
+                    {% if watch.stock > 0 %}
+                        <span class="text-green-600">In Stock</span>
+                    {% else %}
+                        <span class="text-red-600">Out of Stock</span>
+                    {% endif %}
+                </p>
+
+                
+<form method="POST" action="{% url 'add_to_cart' watch.id %}">
+    {% csrf_token %}
+
+    <button type="submit"
+            class="w-full bg-luxury-black text-white py-4 hover:bg-luxury-gold hover:text-black transition uppercase tracking-widest text-sm">
+
+        <i class="fa-solid fa-cart-shopping mr-2"></i>
+        Add to Cart
+
+    </button>
+</form>
+
+
+            </div>
+
+        </div>
+
+    </div>
+</section>
+
+{% endblock %}
